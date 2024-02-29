@@ -1,0 +1,10 @@
+android-ndk/r21e
+android-ndk/r25c
+cmake/3.28.1
+lzma_sdk/9.20
+7zip/19.00
+mingw-builds/12.2.0
+msys2/cci.latest
+ninja/1.11.1
+meson/1.2.1
+nasm/2.15.05

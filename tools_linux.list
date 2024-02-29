@@ -1,0 +1,7 @@
+nasm/2.15.05
+android-ndk/r21e
+android-ndk/r25c
+android-ndk/r26b
+cmake/3.28.1
+ninja/1.11.1
+meson/1.2.1
