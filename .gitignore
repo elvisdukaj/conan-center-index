@@ -2,6 +2,10 @@
 **/test_package/build/
 **/test_package/build-*/
 **/test_package/test_output/
+**/test_package/conanbuild*
+**/test_package/conanrun*
+**/test_package/deactivate_conanbuild*
+**/test_package/deactivate_conanrun*
 conan.lock
 conanbuildinfo.cmake
 conanbuildinfo.txt
