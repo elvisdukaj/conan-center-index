@@ -1,0 +1,32 @@
+diff -Naru a/src/google/protobuf/port_def.inc b/src/google/protobuf/port_def.inc
+--- a/src/google/protobuf/port_def.inc	2024-02-27 15:56:36.391768100 +0100
++++ b/src/google/protobuf/port_def.inc	2024-02-27 15:47:57.698823600 +0100
+@@ -874,6 +874,13 @@
+ #undef GID_MAX
+ #endif  // __APPLE__
+ 
++#if defined(ANDROID) || defined(__ANDROID__)
++#pragma push_macro("UID_MAX")
++#undef UID_MAX
++#pragma push_macro("GID_MAX")
++#undef GID_MAX
++#endif  // defined(ANDROID) || defined(__ANDROID__)
++
+ #if defined(__clang__) || PROTOBUF_GNUC_MIN(3, 0) || defined(_MSC_VER)
+ // Don't let Objective-C Macros interfere with proto identifiers with the same
+ // name.
+diff -Naru a/src/google/protobuf/port_undef.inc b/src/google/protobuf/port_undef.inc
+--- a/src/google/protobuf/port_undef.inc	2024-02-27 15:56:48.834819300 +0100
++++ b/src/google/protobuf/port_undef.inc	2024-02-27 15:47:57.704021400 +0100
+@@ -147,6 +147,11 @@
+ #pragma pop_macro("GID_MAX")
+ #endif  // __APPLE__
+ 
++#if defined(ANDROID) || defined(__ANDROID__)
++#pragma pop_macro("UID_MAX")
++#pragma pop_macro("GID_MAX")
++#endif  // defined(ANDROID) || defined(__ANDROID__)
++
+ #if defined(__clang__) || defined(__GNUC__) || defined(_MSC_VER)
+ #pragma pop_macro("DEBUG")
+ #endif // defined(__clang__) || defined(__GNUC__) || defined(_MSC_VER)

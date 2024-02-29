@@ -26,6 +26,9 @@ patches:
       patch_description: "Handle case where macOS SDK macros may conflict with protobuf message types"
       patch_type: "bugfix"
       patch_source: "https://github.com/protocolbuffers/protobuf/pull/10103"
+    - patch_file: "patches/protobuf-3.21.12-android-macros.patch"
+      patch_description: "Handle case where Android NDK macros may conflict with protobuf message types"
+      patch_type: "bugfix"
   "3.21.9":
     - patch_file: "patches/protobuf-3.21.9-upstream-macos-macros.patch"
       patch_description: "Handle case where macOS SDK macros may conflict with protobuf message types"
