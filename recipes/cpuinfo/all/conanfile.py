@@ -1,6 +1,6 @@
 from conan import ConanFile
 from conan.tools.cmake import CMake, CMakeToolchain, cmake_layout
-from conan.tools.files import copy, get, replace_in_file, rmdir
+from conan.tools.files import copy, get, replace_in_file, rmdir, apply_conandata_patches, export_conandata_patches
 from conan.tools.microsoft import is_msvc
 import os
 
@@ -27,6 +27,9 @@ class CpuinfoConan(ConanFile):
         "fPIC": True,
         "log_level": "default",
     }
+
+    def export_sources(self):
+        export_conandata_patches(self)
 
     def config_options(self):
         if self.settings.os == "Windows":
@@ -82,6 +85,7 @@ class CpuinfoConan(ConanFile):
 
     def build(self):
         self._patch_sources()
+        apply_conandata_patches(self)
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
@@ -101,6 +105,9 @@ class CpuinfoConan(ConanFile):
             self.cpp_info.components["clog"].libs = ["clog"]
             cpuinfo_clog_target = "clog" if self.version < "cci.20220618" else "cpuinfo::clog"
             self.cpp_info.components["clog"].set_property("cmake_target_name", cpuinfo_clog_target)
+
+        if self.settings.os == "Android":
+            self.cpp_info.components["clog"].system_libs.append("log")
 
         self.cpp_info.components["cpuinfo"].set_property("cmake_target_name", "cpuinfo::cpuinfo")
         self.cpp_info.components["cpuinfo"].libs = ["cpuinfo"]

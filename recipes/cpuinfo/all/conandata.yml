@@ -14,3 +14,8 @@ sources:
   "cci.20201217":
     url: "https://github.com/pytorch/cpuinfo/archive/5916273f79a21551890fd3d56fc5375a78d1598d.tar.gz"
     sha256: "f3c16d5d393d6d1fa6b6ed8621dd0a535552df9bc88cbba739375dde38a93142"
+patches:
+  "cci.20230118":
+    - patch_file: "patches/0001_clog_android_missing_log_dependency.patch"
+      patch_description: "Fix build issue when using clog on Android for missing log library"
+      patch_type: "bugfix"

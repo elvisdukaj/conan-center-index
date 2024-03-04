@@ -1,0 +1,12 @@
+diff -Naru a/deps/clog/CMakeLists.txt b/deps/clog/CMakeLists.txt
+--- a/deps/clog/CMakeLists.txt	2023-01-18 03:11:35.000000000 +0100
++++ b/deps/clog/CMakeLists.txt	2024-02-28 14:43:47.187646100 +0100
+@@ -64,7 +64,7 @@
+   TARGET_COMPILE_DEFINITIONS(clog PRIVATE CLOG_LOG_TO_STDIO=0)
+ ENDIF()
+ IF(ANDROID AND NOT CLOG_LOG_TO_STDIO)
+-  TARGET_LINK_LIBRARIES(clog PRIVATE log)
++  TARGET_LINK_LIBRARIES(clog PUBLIC log)
+ ENDIF()
+ 
+ ADD_LIBRARY(cpuinfo::clog ALIAS clog)
