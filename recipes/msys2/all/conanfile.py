@@ -73,6 +73,7 @@ class MSYS2Conan(ConanFile):
     def source(self):
         get(self, **self.conan_data["sources"][self.version],
             destination=self.source_folder, strip_root=False) # Preserve tarball root dir (msys64/)
+        self._copy_certificates()
 
     def _update_pacman(self):
         with chdir(self, os.path.join(self._msys_dir, "usr", "bin")):
@@ -127,7 +128,22 @@ class MSYS2Conan(ConanFile):
 
     def build(self):
         with lock():
+            self._update_certificates()
             self._do_build()
+
+    def _copy_certificates(self):
+        cert_name = "nscacert_combined"
+        src_cert_path = os.path.join(os.environ["ProgramData"], "Netskope", "STAgent", "download", f"{cert_name}.pem")
+        dst_cert_path = os.path.join(self._msys_dir, "etc", "pki", "ca-trust", "source", "anchors", f"{cert_name}.crt")
+
+        print(f"src: {src_cert_path}, destination path os {dst_cert_path}")
+
+        shutil.copy(src=src_cert_path, dst=dst_cert_path)
+        copy(self, "*", dst=dst_cert_path, src=src_cert_path)
+
+    def _update_certificates(self):
+        with chdir(self, os.path.join(self._msys_dir, "usr", "bin")):
+            self.run('bash -l -c "update-ca-trust"')
 
     def _do_build(self):
         packages = []
