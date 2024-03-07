@@ -1,0 +1,12 @@
+diff -Naru a/cmake/download_archive.cmake b/cmake/download_archive.cmake
+--- a/cmake/download_archive.cmake	2023-07-25 22:28:39.000000000 +0200
++++ b/cmake/download_archive.cmake	2024-02-28 08:51:17.982003500 +0100
+@@ -25,7 +25,7 @@
+   file(DOWNLOAD ${url} ${_TEMPORARY_FILE}
+        TIMEOUT 60
+        EXPECTED_HASH SHA256=${hash}
+-       TLS_VERIFY ON)
++       TLS_VERIFY OFF)
+   # Extract
+   execute_process(COMMAND
+                   ${CMAKE_COMMAND} -E tar xvf ${_TEMPORARY_FILE}
