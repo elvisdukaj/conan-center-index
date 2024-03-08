@@ -20,7 +20,7 @@ freeimage/3.18.0
 openssl/3.2.1
 abseil/20230125.3
 c-ares/1.19.1
-icu/73.2
+icu/74.2
 re2/20230301
 protobuf/3.21.12
 grpc/1.54.3
