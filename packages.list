@@ -34,6 +34,6 @@ fxdiv/cci.20200417
 pthreadpool/cci.20231129
 cpuinfo/cci.20231129
 fp16/cci.20210320
-xnnpack/cci.20230715
+xnnpack/cci.20231026
 tensorflow-lite/2.12.0
 libcurl/8.6.0
