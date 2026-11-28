@@ -112,4 +112,12 @@ class ReadLineConan(ConanFile):
         fix_apple_shared_install_name(self)
 
     def package_info(self):
-        self.cpp_info.libs = ["readline", "history"]
+        self.cpp_info.set_property("cmake_target_name", "readline::__readline")  # avoid it usage
+        self.cpp_info.components["libhistory"].libs = ["history"]
+        self.cpp_info.components["libreadline"].libs = ["readline"]
+        self.cpp_info.components["libreadline"].set_property("cmake_target_name", "readline::readline")
+        self.cpp_info.components["libreadline"].requires = ["libhistory"]
+        if self.options.with_library == "termcap":
+            self.cpp_info.components["libreadline"].requires.append("termcap::termcap")
+        else:
+            self.cpp_info.components["libreadline"].requires.append("ncurses::ncurses")
